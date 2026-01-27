@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IdentityVoice</title>
+  <meta name="description" content="Voice identity for messaging — expressive, editable voice messages with emotion, identity and consent." />
+  <style>
+    body { margin:0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; color:#0b0f19; background:#fff; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 56px 20px; }
+    .badge { display:inline-block; padding:6px 10px; border:1px solid #e6e8ee; border-radius:999px; font-size:13px; color:#4b5563; }
+    h1 { font-size: 44px; line-height: 1.1; margin: 18px 0 12px; letter-spacing:-0.5px; }
+    p { font-size: 18px; line-height: 1.6; color:#334155; margin: 10px 0; }
+    .grid { display:grid; grid-template-columns: 1fr; gap:14px; margin-top: 28px; }
+    .card { border:1px solid #e6e8ee; border-radius: 16px; padding: 18px; background: #fafbff; }
+    .card h3 { margin:0 0 6px; font-size: 16px; }
+    .card p { margin:0; font-size: 15px; }
+    .cta { margin-top: 26px; display:flex; gap:12px; flex-wrap:wrap; }
+    a.btn { display:inline-block; padding: 12px 16px; border-radius: 12px; text-decoration:none; font-weight:600; }
+    a.primary { background:#111827; color:#fff; }
+    a.secondary { border:1px solid #d7dbe6; color:#111827; }
+    .foot { margin-top: 42px; font-size: 13px; color:#64748b; }
+    code { background:#f1f5f9; padding:2px 6px; border-radius:6px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <span class="badge">IdentityVoice • Landing Page</span>
+    <h1>Voice identity for messaging.</h1>
+    <p>
+      Emojis and stickers can’t carry real identity or nuanced emotion. Voice can — but today’s messaging
+      makes voice hard to edit, hard to reuse, and hard to trust.
+    </p>
+    <p>
+      IdentityVoice lets people send <b>AI-edited emotional voice messages</b> tied to a reusable <b>Voice ID</b>,
+      so your voice becomes a real identity layer inside chat.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>What we build</h3>
+        <p>Consumer app + messaging integration for expressive, editable voice messages and persona voice identity.</p>
+      </div>
+      <div class="card">
+        <h3>Why now</h3>
+        <p>Voice AI is mature, but messaging UX is stuck. We bring voice identity to the most frequent daily behavior: chat.</p>
+      </div>
+      <div class="card">
+        <h3>Status</h3>
+        <p>MVP built (iOS). Domain email + authentication set up. Now shipping the public landing page + onboarding.</p>
+      </div>
+    </div>
+
+    <div class="cta">
+      <a class="btn primary" href="mailto:ted.z@identityvoice.ca">Contact</a>
+      <a class="btn secondary" href="https://github.com/tedrzhang/tedrzhang.github.io">GitHub</a>
+    </div>
+
+    <div class="foot">
+      © <span id="y"></span> IdentityVoice • <code>identityvoice.ca</code>
+    </div>
+  </div>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>
