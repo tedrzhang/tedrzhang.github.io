@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>IdentityVoice</title>
-  <meta name="description" content="Voice identity for messaging — expressive, editable voice messages with emotion, identity and consent." />
+  <meta name="description" content="Voice stickers for messaging — expressive voice messages with fast preview today, and AI editing + Voice ID enrollment next." />
+
   <style>
     body {
       margin: 0;
@@ -14,21 +15,38 @@
       background: #fff;
     }
     .wrap { max-width: 980px; margin: 0 auto; padding: 56px 20px; }
-    .badge { display:inline-block; padding:6px 10px; border:1px solid #e6e8ee; border-radius:999px; font-size:13px; color:#4b5563; }
+    .badge {
+      display:inline-block; padding:6px 10px; border:1px solid #e6e8ee;
+      border-radius:999px; font-size:13px; color:#4b5563;
+    }
+
     h1 { font-size: 44px; line-height: 1.1; margin: 18px 0 12px; letter-spacing:-0.5px; }
-    p { font-size: 18px; line-height: 1.6; color:#334155; margin: 10px 0; }
-    .grid { display:grid; grid-template-columns: 1fr; gap:14px; margin-top: 28px; }
-    .card { border:1px solid #e6e8ee; border-radius: 16px; padding: 18px; background: #fafbff; }
-    .card h3 { margin:0 0 6px; font-size: 16px; }
-    .card p { margin:0; font-size: 15px; }
-    .cta { margin-top: 26px; display:flex; gap:12px; flex-wrap:wrap; }
-    a.btn { display:inline-block; padding: 12px 16px; border-radius: 12px; text-decoration:none; font-weight:600; }
+    h2 { font-size: 18px; margin: 0 0 8px; letter-spacing: -0.1px; }
+    p  { font-size: 18px; line-height: 1.6; color:#334155; margin: 10px 0; }
+
+    .heroSub { font-size: 18px; color:#334155; max-width: 860px; }
+    .heroNote { font-size: 14px; color:#64748b; margin-top: 10px; }
+
+    .cta { margin-top: 22px; display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+    a.btn { display:inline-block; padding: 12px 16px; border-radius: 12px; text-decoration:none; font-weight:700; }
     a.primary { background:#111827; color:#fff; }
-    a.secondary { border:1px solid #d7dbe6; color:#111827; }
-    .foot { margin-top: 42px; font-size: 13px; color:#64748b; }
+    a.secondary { border:1px solid #d7dbe6; color:#111827; background:#fff; }
+
+    .grid { display:grid; grid-template-columns: 1fr; gap:14px; margin-top: 28px; }
+    @media (min-width: 900px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .card { border:1px solid #e6e8ee; border-radius: 16px; padding: 18px; background: #fafbff; }
+    .card p { margin: 0; font-size: 15px; color:#334155; }
+    .card ul { margin: 10px 0 0 18px; padding: 0; color:#334155; font-size: 15px; line-height: 1.55; }
+    .card li { margin: 6px 0; }
+
     code { background:#f1f5f9; padding:2px 6px; border-radius:6px; }
 
-    /* --- Video embed wrapper (prevents CSS from showing as text) --- */
+    .divider { margin: 28px 0 0; height: 1px; background: #e6e8ee; }
+
+    /* --- Video embed wrapper --- */
     .videoWrap{
       position: relative;
       width: 100%;
@@ -37,6 +55,7 @@
       overflow: hidden;
       border: 1px solid #e6e8ef;
       background: #f7f8fb;
+      margin-top: 12px;
     }
     .videoWrap iframe{
       position: absolute;
@@ -45,73 +64,108 @@
       height: 100%;
       border: 0;
     }
+
     .pdfLink{
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  width: fit-content;
-  margin-top: 26px;          /* 距离更远 */
-  font-size: 20px;           /* 比 Product Demo 更大 */
-  font-weight: 900;          /* 更粗 */
-  color: #0b0f19;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      margin-top: 14px;
+      font-size: 16px;
+      font-weight: 900;
+      color: #0b0f19;
+      text-decoration: none;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 2px solid #0b0f19;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .pdfLink:before{
+      content: "📄";
+      font-size: 18px;
+      line-height: 1;
+    }
+    .pdfLink:hover{ background: #f3f4f6; transform: translateY(-1px); }
+    .pdfLink:active{ transform: translateY(0); }
 
-  text-decoration: none;
-  padding: 14px 18px;        /* 更大按钮 */
-  border-radius: 14px;
+    .foot { margin-top: 42px; font-size: 13px; color:#64748b; }
+    .foot a { color:#64748b; text-decoration:none; border-bottom: 1px dotted #cbd5e1; }
+    .foot a:hover { color:#0b0f19; border-bottom-color:#0b0f19; }
 
-  border: 2px solid #0b0f19; /* 更醒目的黑边 */
-  background: #fff;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08); /* 增加突出感 */
-}
-
-.pdfLink:before{
-  content: "📄";
-  font-size: 20px;
-  line-height: 1;
-}
-
-.pdfLink:hover{
-  background: #f3f4f6;
-  transform: translateY(-1px);
-}
-
-.pdfLink:active{
-  transform: translateY(0);
-}
+    .pillRow { margin-top: 10px; display:flex; gap:10px; flex-wrap:wrap; }
+    .pill {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border:1px solid #e6e8ee; border-radius:999px;
+      font-size:12px; color:#4b5563; background:#fff;
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-    <span class="badge">IdentityVoice • Landing Page</span>
-    <h1>Voice identity for messaging.</h1>
-    <p>
-      Emojis and stickers can’t carry real identity or nuanced emotion. Voice can — but today’s messaging
-      makes voice hard to edit, hard to reuse, and hard to trust.
+    <!-- 1) HERO -->
+    <span class="badge">IdentityVoice • B2C Messaging</span>
+    <h1>Voice stickers for messaging.</h1>
+    <p class="heroSub">
+      Messaging is emotional, but today’s tools are clunky: emojis are ambiguous and voice notes feel high-friction.
+      We make it easy to send a vivid, emotionally expressive voice message—without “performing.”
     </p>
-    <p>
-      IdentityVoice lets people send <b>AI-edited emotional voice messages</b> tied to a reusable <b>Voice ID</b>,
-      so your voice becomes a real identity layer inside chat.
+    <p class="heroSub">
+      <b>Now:</b> our working iOS MVP uses <b>on-device DSP</b> for low-latency voice styling (record → preview → send).
+      <b>Next:</b> we’re adding an <b>AI editor</b> (clearer, less rambling, fewer ambiguities) and <b>Voice ID enrollment</b> on top.
     </p>
+
+    <div class="pillRow">
+      <span class="pill">Message-native output</span>
+      <span class="pill">Instant preview (DSP MVP)</span>
+      <span class="pill">AI editor + Voice ID (next)</span>
+      <span class="pill">Mimic Challenge + scoring (game loop)</span>
+    </div>
+
+    <div class="cta">
+      <a class="btn primary" href="#demo">Watch the demo</a>
+      <a class="btn secondary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Beta%20Access">Join the beta</a>
+      <a class="btn secondary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Investor%20Intro">Contact</a>
+    </div>
+
+    <div class="divider"></div>
 
     <div class="grid">
+      <!-- 2) THE PROBLEM -->
       <div class="card">
-        <h3>What we build</h3>
-        <p>Consumer app + messaging integration for expressive, editable voice messages and persona voice identity.</p>
+        <h2>1) The problem</h2>
+        <ul>
+          <li><b>Emojis are ambiguous</b> and often misinterpreted.</li>
+          <li><b>Voice notes convey emotion</b>, but “performing” in raw voice is socially high-friction.</li>
+          <li>People prefer messaging over calls because it’s <b>asynchronous</b>—but plain text loses vocal nuance.</li>
+        </ul>
       </div>
 
+      <!-- 3) WHAT WE’RE BUILDING (NOW / NEXT / LATER) -->
       <div class="card">
-        <h3>Why now</h3>
-        <p>Voice AI is mature, but messaging UX is stuck. We bring voice identity to the most frequent daily behavior: chat.</p>
+        <h2>2) What we’re building</h2>
+        <p><b>A consumer voice expression layer for messaging.</b></p>
+        <ul>
+          <li><b>Now (working MVP):</b> on-device DSP styles + instant preview + send via iOS Messages flow.</li>
+          <li><b>Next:</b> AI editing + cleanup + “logic tightening,” then render back in a vivid voice.</li>
+          <li><b>Later:</b> reusable Voice ID enrollment + sharing loops + creator packs.</li>
+        </ul>
       </div>
 
+      <!-- 4) WHY IT’S DIFFERENT -->
       <div class="card">
-        <h3>Status</h3>
-        <p>MVP built (iOS). Domain email + authentication set up. Now shipping the public landing page + onboarding.</p>
+        <h2>3) Why it’s different</h2>
+        <p>
+          <b>Message-native.</b> We don’t keep users inside a standalone companion app.
+          We output a portable <b>voice sticker / voice creation</b> that can be dropped into any conversation thread.
+        </p>
       </div>
 
-      <div class="card">
-        <h3>Product Demo</h3>
-        <p>A quick walkthrough of the current MVP.</p>
+      <!-- 5) PRODUCT DEMO -->
+      <div class="card" id="demo">
+        <h2>4) Product demo</h2>
+        <p>See the current MVP: record → stylize → preview → send.</p>
         <div class="videoWrap">
           <iframe
             src="https://www.youtube.com/embed/6R4rkyLQHK4"
@@ -120,18 +174,61 @@
             allowfullscreen>
           </iframe>
         </div>
+
         <a class="pdfLink" href="./PersonaVoice_Project_Brief.pdf" target="_blank" rel="noopener">
-  PersonaVoice_Project_Brief
-</a>
+          PersonaVoice_Project_Brief
+        </a>
+      </div>
+
+      <!-- 6) STATUS / TRACTION -->
+      <div class="card">
+        <h2>5) Status</h2>
+        <ul>
+          <li><b>Working iOS MVP</b>: end-to-end flow for record → transform → preview → send.</li>
+          <li><b>Next milestone</b>: ship AI editor + Voice ID enrollment private beta.</li>
+          <li><b>Focus</b>: validate repeat use (sending frequency), sharing, and challenge participation.</li>
+        </ul>
+      </div>
+
+      <!-- 7) MOAT / IP -->
+      <div class="card">
+        <h2>6) Moat / IP</h2>
+        <ul>
+          <li>Patent/IP portfolio around style-based voice messaging, role-swap reference rendering + imitation scoring, and persona/voice identity objects.</li>
+          <li>We’re building defensible loops (message-native sharing + Mimic scoring) that drive retention beyond one-off novelty.</li>
+        </ul>
+      </div>
+
+      <!-- 8) TEAM -->
+      <div class="card">
+        <h2>7) Team</h2>
+        <ul>
+          <li><b>CEO (Alexander):</b> CEO + senior software engineer; drives architecture and execution.</li>
+          <li><b>CTO (Miao):</b> senior AI/ML engineer; builds the core voice + scoring pipeline.</li>
+          <li><b>President (Ted):</b> retired senior engineer; product strategy, partnerships, and patent/IP portfolio.</li>
+          <li><b>All founders write code</b>, enabling fast alignment and decisive execution.</li>
+        </ul>
+      </div>
+
+      <!-- Optional: simple “Now / Next” summary to reinforce clarity -->
+      <div class="card">
+        <h2>8) Roadmap (clear and honest)</h2>
+        <ul>
+          <li><b>Today:</b> low-latency DSP voice styling MVP in iOS.</li>
+          <li><b>Next:</b> AI editor (clearer speech → cleaner script) + Voice ID enrollment.</li>
+          <li><b>Then:</b> Mimic Challenge + scoring expansion + creator voice packs.</li>
+        </ul>
       </div>
     </div>
 
     <div class="cta">
-      <a class="btn primary" href="mailto:ted.z@identityvoice.ca">Contact</a>
+      <a class="btn primary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Beta%20Access">Join the beta</a>
+      <a class="btn secondary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Investor%20Intro">Contact</a>
     </div>
 
     <div class="foot">
-      © <span id="y"></span> IdentityVoice • <code>identityvoice.ca</code>
+      © <span id="y"></span> IdentityVoice • <code>identityvoice.ca</code> •
+      <a href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Beta%20Access">Beta</a>
     </div>
   </div>
 
