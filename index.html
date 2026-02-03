@@ -5,59 +5,209 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>IdentityVoice</title>
   <meta name="description" content="Voice stickers for messaging — expressive voice messages with fast preview today, and AI editing + Voice ID enrollment next." />
-<!-- redeploy -->
+
   <style>
+    :root {
+      /* --- Palette Definition --- */
+      --cyan-primary: #06b6d4;      /* Main Brand Color */
+      --cyan-dark: #0891b2;         /* Hover state */
+      --cyan-light: #cffafe;        /* Light accents */
+      
+      --blue-bg: #f0f9ff;           /* Light Blue Background */
+      --blue-card-bg: #ffffff;      /* White Card Background */
+      
+      --green-accent: #10b981;      /* Secondary/Status */
+      --green-light: #d1fae5;       /* Green badge bg */
+
+      --text-main: #0f172a;         /* Dark Slate */
+      --text-muted: #475569;        /* Muted Gray */
+      --border-color: #e2e8f0;
+    }
+
+    /* --- Global Resets & Typography --- */
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Noto Sans", "PingFang SC",
-        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      color: #0b0f19;
-      background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text-main);
+      background-color: var(--blue-bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 56px 20px; }
+
+    * { box-sizing: border-box; }
+
+    /* --- Layout Wrappers --- */
+    .wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 40px auto;
+    }
+
     .badge {
-      display:inline-block; padding:6px 10px; border:1px solid #e6e8ee;
-      border-radius:999px; font-size:13px; color:#4b5563;
+      display: inline-block;
+      padding: 6px 12px;
+      background: var(--cyan-light);
+      color: var(--cyan-dark);
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
     }
 
-    h1 { font-size: 44px; line-height: 1.1; margin: 18px 0 12px; letter-spacing:-0.5px; }
-    h2 { font-size: 18px; margin: 0 0 8px; letter-spacing: -0.1px; }
-    p  { font-size: 18px; line-height: 1.6; color:#334155; margin: 10px 0; }
+    /* FIXED: Adjusted Title Size */
+    h1 {
+      font-size: 2.5rem; /* Approx 40px, reduced from previous massive size */
+      line-height: 1.2;
+      margin: 0 0 20px 0;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
 
-    .heroSub { font-size: 18px; color:#334155; max-width: 860px; }
-    .heroNote { font-size: 14px; color:#64748b; margin-top: 10px; }
+    .heroSub {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
 
-    .cta { margin-top: 22px; display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
-    a.btn { display:inline-block; padding: 12px 16px; border-radius: 12px; text-decoration:none; font-weight:700; }
-    a.primary { background:#111827; color:#fff; }
-    a.secondary { border:1px solid #d7dbe6; color:#111827; background:#fff; }
+    .heroSub b {
+      color: var(--cyan-dark);
+    }
 
-    .grid { display:grid; grid-template-columns: 1fr; gap:14px; margin-top: 28px; }
-    @media (min-width: 900px) {
+    /* --- Pills / Features --- */
+    .pillRow {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 24px 0;
+    }
+
+    .pill {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    /* --- Buttons --- */
+    .cta {
+      margin-top: 32px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    a.btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    /* Cyan Primary Button */
+    a.primary {
+      background-color: var(--cyan-primary);
+      color: #fff;
+      box-shadow: 0 4px 6px -1px rgba(6, 182, 212, 0.2);
+    }
+    a.primary:hover {
+      background-color: var(--cyan-dark);
+      transform: translateY(-1px);
+    }
+
+    /* White/Secondary Button */
+    a.secondary {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+    a.secondary:hover {
+      border-color: var(--cyan-primary);
+      color: var(--cyan-primary);
+    }
+
+    /* --- Grid Layout --- */
+    .divider { margin: 60px 0; border-top: 1px solid var(--border-color); opacity: 0.6; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 768px) {
       .grid { grid-template-columns: 1fr 1fr; }
     }
 
-    .card { border:1px solid #e6e8ee; border-radius: 16px; padding: 18px; background: #fafbff; }
-    .card p { margin: 0; font-size: 15px; color:#334155; }
-    .card ul { margin: 10px 0 0 18px; padding: 0; color:#334155; font-size: 15px; line-height: 1.55; }
-    .card li { margin: 6px 0; }
+    /* --- Card Styling --- */
+    .card {
+      background: var(--blue-card-bg);
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(255,255,255,0.5);
+      transition: transform 0.2s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    }
 
-    code { background:#f1f5f9; padding:2px 6px; border-radius:6px; }
+    .card h2 {
+      font-size: 1.1rem;
+      margin: 0 0 12px 0;
+      color: var(--cyan-dark); /* Using Brand Color for Headers */
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
 
-    .divider { margin: 28px 0 0; height: 1px; background: #e6e8ee; }
+    .card p { font-size: 15px; margin: 0 0 12px 0; color: var(--text-muted); }
+    
+    .card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+    .card li { margin-bottom: 8px; }
+    .card li b { color: var(--text-main); }
 
-    /* --- Video embed wrapper --- */
-    .videoWrap{
+    /* --- Green Status Tags (The "Green" Requirement) --- */
+    .status-highlight {
+      color: var(--green-accent);
+      font-weight: 700;
+    }
+
+    /* --- Video Embed --- */
+    .videoWrap {
       position: relative;
       width: 100%;
-      padding-top: 56.25%; /* 16:9 */
-      border-radius: 16px;
+      padding-top: 56.25%;
+      border-radius: 12px;
       overflow: hidden;
-      border: 1px solid #e6e8ef;
-      background: #f7f8fb;
-      margin-top: 12px;
+      background: #000;
+      margin-top: 16px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-    .videoWrap iframe{
+    .videoWrap iframe {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -65,108 +215,102 @@
       border: 0;
     }
 
-    .pdfLink{
-      display: inline-flex;
+    /* --- PDF Link --- */
+    .pdfLink {
+      display: flex;
       align-items: center;
       gap: 10px;
-      width: fit-content;
-      margin-top: 14px;
-      font-size: 16px;
-      font-weight: 900;
-      color: #0b0f19;
+      margin-top: 16px;
+      padding: 12px;
+      background: var(--blue-bg);
+      border-radius: 8px;
       text-decoration: none;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 2px solid #0b0f19;
-      background: #fff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px solid var(--border-color);
+      transition: background 0.2s;
     }
-    .pdfLink:before{
-      content: "📄";
-      font-size: 18px;
-      line-height: 1;
+    .pdfLink:hover { background: var(--cyan-light); border-color: var(--cyan-primary); }
+    .pdfLink::before { content: "📄"; font-size: 18px; }
+
+    /* --- Footer --- */
+    .foot {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-muted);
     }
-    .pdfLink:hover{ background: #f3f4f6; transform: translateY(-1px); }
-    .pdfLink:active{ transform: translateY(0); }
+    .foot a { color: var(--text-muted); }
+    .foot a:hover { color: var(--cyan-primary); }
 
-    .foot { margin-top: 42px; font-size: 13px; color:#64748b; }
-    .foot a { color:#64748b; text-decoration:none; border-bottom: 1px dotted #cbd5e1; }
-    .foot a:hover { color:#0b0f19; border-bottom-color:#0b0f19; }
-
-    .pillRow { margin-top: 10px; display:flex; gap:10px; flex-wrap:wrap; }
-    .pill {
-      display:inline-flex; align-items:center; gap:8px;
-      padding:6px 10px; border:1px solid #e6e8ee; border-radius:999px;
-      font-size:12px; color:#4b5563; background:#fff;
+    /* Mobile Title Tweaks */
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .wrap { padding: 40px 20px; }
     }
   </style>
 </head>
 
 <body>
+
   <div class="wrap">
-    <!-- 1) HERO -->
-    <span class="badge">IdentityVoice • B2C Messaging</span>
-    <h1>Voice stickers for messaging.</h1>
-    <p class="heroSub">
-      Messaging is emotional, but today’s tools are clunky: emojis are ambiguous and voice notes feel high-friction.
-      We make it easy to send a vivid, emotionally expressive voice message—without “performing.”
-    </p>
-    <p class="heroSub">
-      <b>Now:</b> our working iOS MVP uses <b>on-device DSP</b> for low-latency voice styling (record → preview → send).
-      <b>Next:</b> we’re adding an <b>AI editor</b> and <b>Voice ID enrollment</b> on top.
-    </p>
+    
+    <div class="hero">
+      <span class="badge">IdentityVoice • B2C Messaging</span>
+      <h1>Voice stickers for messaging.</h1>
+      
+      <p class="heroSub">
+        Messaging is emotional, but today’s tools are clunky. <br>
+        We make it easy to send a vivid, expressive voice message—without “performing.”
+      </p>
 
-    <div class="pillRow">
-      <span class="pill">Message-native output</span>
-      <span class="pill">Instant preview (DSP MVP)</span>
-      <span class="pill">AI editor + Voice ID (next)</span>
-      <span class="pill">Mimic Challenge + scoring (game loop)</span>
-    </div>
+      <div class="pillRow">
+        <span class="pill">Message-native output</span>
+        <span class="pill">Instant preview (DSP)</span>
+        <span class="pill" style="border-color: var(--green-accent); color:var(--green-accent);">AI editor (Next)</span>
+      </div>
 
-    <div class="cta">
-      <a class="btn primary" href="#demo">Watch the demo</a>
-      <a class="btn secondary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Beta%20Access">Join the beta</a>
-      <a class="btn secondary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Investor%20Intro">Contact</a>
+      <div class="cta">
+        <a class="btn primary" href="#demo">Watch Demo</a>
+        <a class="btn secondary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Beta%20Access">Join Beta</a>
+      </div>
     </div>
 
     <div class="divider"></div>
 
     <div class="grid">
-      <!-- 2) THE PROBLEM -->
+      
       <div class="card">
-        <h2>1) The problem</h2>
+        <h2>The Problem</h2>
         <ul>
           <li><b>Emojis are ambiguous</b> and often misinterpreted.</li>
           <li><b>Voice notes convey emotion</b>, but “performing” in raw voice is socially high-friction.</li>
-          <li>People prefer messaging over calls because it’s <b>asynchronous</b>—but plain text loses vocal nuance.</li>
+          <li>Plain text loses vocal nuance in asynchronous messaging.</li>
         </ul>
       </div>
 
-      <!-- 3) WHAT WE’RE BUILDING -->
       <div class="card">
-        <h2>2) What we’re building</h2>
-        <p><b>A voice sticker layer for messaging: short, expressive clips powered by your voice.</b></p>
+        <h2>What We’re Building</h2>
+        <p><b>A voice sticker layer for messaging.</b></p>
         <ul>
-          <li><b>Core flow (today):</b> record → stylize (DSP) → instant preview → send.</li>
-          <li><b>Game loop:</b> recipients can tap <b>Mimic</b> to reply; we score + generate lightweight feedback.</li>
-          <li><b>Next upgrade:</b> AI editor + cleanup + Voice ID enrollment for clearer messages and consistent identity.</li>
-          <li><b>Expansion:</b> creator voice/style packs and partner distribution via SDK/API.</li>
+          <li><b>Today:</b> Record → Stylize (DSP) → Instant Preview → Send.</li>
+          <li><b>Game Loop:</b> Recipients tap <b>Mimic</b> to reply; we generate scores.</li>
+          <li class="status-highlight">Next: AI editor + Voice ID enrollment.</li>
         </ul>
       </div>
 
-      <!-- 4) WHY IT’S DIFFERENT -->
       <div class="card">
-        <h2>3) Why it’s different</h2>
+        <h2>Why It’s Different</h2>
         <p>
-          <b>Message-native.</b> We don’t keep users inside a standalone companion app.
-          We output a portable <b>voice sticker / voice creation</b> that can be dropped into any conversation thread.
+          <b>Message-native.</b> We don’t keep users trapped in a standalone app.
+          We output a portable <b>voice sticker</b> that drops into any conversation thread.
         </p>
       </div>
 
-      <!-- 5) PRODUCT DEMO -->
       <div class="card" id="demo">
-        <h2>4) Product demo</h2>
-        <p>See the current MVP: record → stylize → preview → send.</p>
+        <h2>Product Demo</h2>
+        <p>Current MVP: Record → Stylize → Preview.</p>
         <div class="videoWrap">
           <iframe
             src="https://www.youtube.com/embed/6R4rkyLQHK4"
@@ -175,62 +319,58 @@
             allowfullscreen>
           </iframe>
         </div>
-
         <a class="pdfLink" href="./PersonaVoice_Project_Brief.pdf" target="_blank" rel="noopener">
-          PersonaVoice_Project_Updated
+          View Project Brief (PDF)
         </a>
       </div>
 
-      <!-- 6) STATUS / TRACTION -->
       <div class="card">
-        <h2>5) Status</h2>
+        <h2>Status & Traction</h2>
         <ul>
-          <li><b>Working iOS MVP:</b> end-to-end record → transform → preview → send.</li>
-          <li><b>Validation focus:</b> sending frequency, repeat use, and Mimic participation (1:1 and group contexts).</li>
-          <li><b>Current build goals:</b> reliability, UX polish, and measurable retention loops.</li>
+          <li><b>Working iOS MVP:</b> End-to-end functionality.</li>
+          <li><b>Validation Focus:</b> Repeat use and Mimic participation.</li>
+          <li><b>Current Goals:</b> Reliability and measurable retention loops.</li>
         </ul>
       </div>
 
-      <!-- 7) MOAT / IP -->
       <div class="card">
-        <h2>6) Moat / IP</h2>
+        <h2>Moat / IP</h2>
         <ul>
-          <li>Patent/IP portfolio around style-based voice messaging, role-swap reference rendering + imitation scoring, and persona/voice identity objects.</li>
-          <li>We’re building defensible loops (message-native sharing + Mimic scoring) that drive retention beyond one-off novelty.</li>
+          <li><b>Patent Portfolio:</b> Style-based voice messaging and imitation scoring.</li>
+          <li><b>Defensibility:</b> Network effects via message-native sharing + Mimic scoring loops.</li>
         </ul>
       </div>
 
-      <!-- 8) TEAM -->
       <div class="card">
-        <h2>7) Team</h2>
+        <h2>Team</h2>
         <ul>
-          <li><b>CEO (Alexander):</b> CEO + senior software engineer; drives architecture and execution.</li>
-          <li><b>CTO (Miao):</b> senior AI/ML engineer; builds the core voice + scoring pipeline.</li>
-          <li><b>President (Ted):</b> senior engineer; product strategy, partnerships, and patent/IP portfolio.</li>
-          <li><b>All founders write code</b>, enabling fast alignment and decisive execution.</li>
+          <li><b>CEO (Alexander):</b> Architecture & execution.</li>
+          <li><b>CTO (Miao):</b> AI/ML voice pipeline.</li>
+          <li><b>President (Ted):</b> Strategy & IP.</li>
+          <li><b class="status-highlight">All founders write code.</b></li>
         </ul>
       </div>
 
-      <!-- 9) ROADMAP -->
       <div class="card">
-        <h2>8) Roadmap</h2>
+        <h2>Roadmap</h2>
         <ul>
-          <li><b>0–3 months:</b> AI editor + Voice ID enrollment beta; tighten onboarding and message quality.</li>
-          <li><b>3–6 months:</b> Mimic scoring expansion and group-chat play; ship premium modes + creator packs.</li>
-          <li><b>6–12 months:</b> SDK/API for messaging apps & CPaaS; partner pilots and scalable distribution.</li>
+          <li><b>0–3 months:</b> AI editor + Voice ID beta.</li>
+          <li><b>3–6 months:</b> Group-chat play & premium modes.</li>
+          <li><b>6–12 months:</b> SDK/API for partner distribution.</li>
         </ul>
       </div>
+
     </div>
 
-    <div class="cta">
-      <a class="btn primary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Beta%20Access">Join the beta</a>
-      <a class="btn secondary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Investor%20Intro">Contact</a>
+    <div class="cta" style="margin-top: 60px;">
+      <a class="btn primary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Beta%20Access">Join the Beta</a>
+      <a class="btn secondary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Investor%20Intro">Contact Team</a>
     </div>
 
     <div class="foot">
-      © <span id="y"></span> IdentityVoice • <code>identityvoice.ca</code> •
-      <a href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Beta%20Access">Beta</a>
+      © <span id="y"></span> IdentityVoice • <code>identityvoice.ca</code>
     </div>
+
   </div>
 
   <script>
