@@ -14,7 +14,7 @@
       --cyan-light: #cffafe;        /* Light accents */
 
       --blue-bg: #f0f9ff;           /* Light Blue Background */
-      --blue-card-bg: #e9fbff;      /* Tinted card background (NOT pure white) */
+      --blue-card-bg: #ffffff;      /* White Card Background (not used as card bg now) */
 
       --green-accent: #10b981;      /* Secondary/Status */
       --green-light: #d1fae5;       /* Green badge bg */
@@ -23,107 +23,104 @@
       --text-muted: #475569;        /* Muted Gray */
       --border-color: #e2e8f0;
 
-      --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
-      --radius-xl: 18px;
-      --radius-lg: 14px;
+      /* Unified substrate background (ALL cards/sections use this) */
+      --substrate-bg: var(--cyan-light);
+
+      --shadow: 0 6px 18px rgba(2, 132, 199, 0.08);
+      --radius: 18px;
     }
 
     * { box-sizing: border-box; }
-    html, body { height: 100%; }
 
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Noto Sans", "PingFang SC",
         "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
       color: var(--text-main);
-      background:
-        radial-gradient(900px 400px at 15% 0%, rgba(6,182,212,0.14), transparent 60%),
-        radial-gradient(900px 500px at 90% 10%, rgba(16,185,129,0.10), transparent 55%),
-        linear-gradient(180deg, var(--blue-bg) 0%, #ffffff 45%, rgba(207,250,254,0.55) 120%);
+      background: var(--blue-bg); /* pure solid */
     }
 
     .wrap {
-      max-width: 1000px;
+      max-width: 980px;
       margin: 0 auto;
-      padding: 58px 20px 64px;
+      padding: 56px 20px 70px;
     }
 
-    /* Typography */
+    /* ---------- Typography ---------- */
     h1 {
-      font-size: clamp(30px, 4.2vw, 42px);
+      font-size: 38px;
       line-height: 1.12;
       margin: 14px 0 10px;
       letter-spacing: -0.6px;
     }
+    @media (min-width: 900px) {
+      h1 { font-size: 44px; }
+    }
+
     h2 {
       font-size: 16px;
-      margin: 0;
+      margin: 0 0 10px;
       letter-spacing: -0.1px;
+      color: var(--text-main);
     }
+
     p {
-      font-size: 18px;
+      font-size: 17px;
       line-height: 1.65;
       color: var(--text-muted);
       margin: 10px 0;
     }
 
-    /* Top badge */
+    /* ---------- Substrate / Card ---------- */
+    .card {
+      background: var(--substrate-bg); /* ALL substrates same */
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden; /* avoid visual overlap */
+    }
+
+    /* ---------- Badge / Pills ---------- */
     .badge {
       display:inline-flex;
       align-items:center;
-      gap:8px;
+      gap: 8px;
       padding: 7px 12px;
-      border: 1px solid rgba(6,182,212,0.25);
       border-radius: 999px;
       font-size: 13px;
-      font-weight: 800;
-      color: var(--cyan-dark);
-      background: linear-gradient(180deg, rgba(207,250,254,0.95), rgba(240,249,255,0.95));
-    }
-    .badge:before{
-      content:"●";
-      font-size: 10px;
-      color: var(--green-accent);
-    }
-
-    /* HERO CARD */
-    .heroCard{
-      border: 1px solid rgba(6,182,212,0.18);
-      border-radius: var(--radius-xl);
-      background:
-        radial-gradient(800px 300px at 10% 0%, rgba(6,182,212,0.16), transparent 60%),
-        radial-gradient(700px 380px at 90% 10%, rgba(16,185,129,0.10), transparent 55%),
-        linear-gradient(180deg, rgba(240,249,255,0.98), rgba(207,250,254,0.42));
-      box-shadow: var(--shadow-soft);
-      padding: 22px 22px 20px;
-    }
-
-    .heroSub { font-size: 18px; color: var(--text-muted); max-width: 860px; }
-    .heroNote { font-size: 14px; color: var(--text-muted); opacity: .9; margin-top: 10px; }
-
-    /* Pills */
-    .pillRow { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
-    .pill {
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 7px 11px;
-      border: 1px solid rgba(6,182,212,0.18);
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 800;
+      font-weight: 700;
       color: var(--text-main);
-      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(6,182,212,0.35);
+      background: rgba(255,255,255,0.55); /* still solid, not gradient */
     }
-    .pill .dot{
-      width: 8px; height: 8px; border-radius: 999px;
-      background: var(--cyan-primary);
-      box-shadow: 0 0 0 4px rgba(6,182,212,0.10);
-    }
-    .pill.green .dot{
+    .badgeDot{
+      width: 8px; height: 8px; border-radius: 99px;
       background: var(--green-accent);
-      box-shadow: 0 0 0 4px rgba(16,185,129,0.10);
+      display:inline-block;
     }
 
-    /* Buttons */
+    .pillRow {
+      margin-top: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .pill {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border:1px solid rgba(6,182,212,0.30);
+      border-radius:999px;
+      font-size:12px;
+      color: var(--text-main);
+      background: var(--blue-bg); /* solid */
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    /* ---------- Buttons ---------- */
     .cta {
       margin-top: 18px;
       display:flex;
@@ -131,139 +128,77 @@
       flex-wrap:wrap;
       align-items:center;
     }
-
-    a.btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
+    a.btn {
+      display:inline-block;
       padding: 12px 16px;
       border-radius: 14px;
       text-decoration:none;
-      font-weight: 900;
+      font-weight: 850;
       font-size: 15px;
       border: 1px solid transparent;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
-      will-change: transform;
+      transition: transform 120ms ease, background 120ms ease, border-color 120ms ease, color 120ms ease;
+    }
+    a.btn:active { transform: translateY(0); }
+    a.btn:hover { transform: translateY(-1px); }
+
+    a.primary {
+      background: var(--cyan-primary);
+      color: #ffffff;
+      border-color: rgba(0,0,0,0.05);
+    }
+    a.primary:hover {
+      background: var(--cyan-dark);
     }
 
-    a.btn.primary{
-      color: #fff;
-      background: linear-gradient(180deg, var(--cyan-primary), var(--cyan-dark));
-      box-shadow: 0 10px 24px rgba(6, 182, 212, 0.18);
-    }
-    a.btn.primary:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(6, 182, 212, 0.22);
-    }
-    a.btn.primary:active{ transform: translateY(0); }
-
-    a.btn.secondary{
+    a.secondary {
+      background: rgba(255,255,255,0.55);
       color: var(--cyan-dark);
-      background: rgba(255,255,255,0.85);
-      border-color: rgba(6,182,212,0.35);
-      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+      border-color: rgba(6,182,212,0.45);
     }
-    a.btn.secondary:hover{
-      transform: translateY(-1px);
-      background: rgba(207,250,254,0.55);
-      border-color: rgba(6,182,212,0.55);
-    }
-    a.btn.secondary:active{ transform: translateY(0); }
-
-    .divider{
-      margin: 22px 0 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(6,182,212,0.35), transparent);
+    a.secondary:hover {
+      background: rgba(255,255,255,0.75);
+      border-color: rgba(6,182,212,0.65);
+      color: var(--text-main);
     }
 
-    /* Grid + Cards */
+    /* ---------- Grid (no overlap) ---------- */
     .grid {
       display:grid;
       grid-template-columns: 1fr;
-      gap: 14px;
+      gap: 16px;               /* ensures spacing; no overlap */
       margin-top: 18px;
     }
     @media (min-width: 900px) {
       .grid { grid-template-columns: 1fr 1fr; }
     }
 
-    .card {
-      border: 1px solid rgba(6,182,212,0.16);
-      border-radius: var(--radius-xl);
-      padding: 18px;
-      background:
-        radial-gradient(700px 220px at 10% 0%, rgba(6,182,212,0.10), transparent 55%),
-        linear-gradient(180deg, rgba(233,251,255,0.95), rgba(240,249,255,0.65));
-      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
-      overflow: hidden;
-    }
-
-    .cardHeader{
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-
-    .numTag{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width: 26px;
-      height: 26px;
-      padding: 0 9px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 900;
-      color: var(--cyan-dark);
-      background: rgba(207,250,254,0.90);
-      border: 1px solid rgba(6,182,212,0.20);
-    }
-
-    .miniTag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 900;
-      color: #065f46;
-      background: rgba(209,250,229,0.95);
-      border: 1px solid rgba(16,185,129,0.22);
-      white-space: nowrap;
-    }
-    .miniTag:before{
-      content:"●";
-      font-size: 10px;
-      color: var(--green-accent);
-    }
-
-    .card p { margin: 0; font-size: 15px; color: var(--text-muted); }
     .card ul {
-      margin: 10px 0 0 18px;
+      margin: 8px 0 0 18px;
       padding: 0;
       color: var(--text-muted);
       font-size: 15px;
       line-height: 1.6;
     }
-    .card li { margin: 8px 0; }
+    .card li { margin: 7px 0; }
 
-    code { background: rgba(255,255,255,0.85); padding:2px 6px; border-radius:6px; border: 1px solid rgba(6,182,212,0.14); }
+    code {
+      background: rgba(255,255,255,0.6);
+      padding:2px 6px;
+      border-radius:8px;
+      border: 1px solid rgba(6,182,212,0.18);
+    }
 
-    /* --- Video embed wrapper --- */
+    /* ---------- Video ---------- */
     .videoWrap{
       position: relative;
       width: 100%;
-      padding-top: 56.25%; /* 16:9 */
+      padding-top: 56.25%;
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid rgba(6,182,212,0.25);
-      background: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.55); /* solid */
       margin-top: 12px;
-      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.05);
+      box-shadow: 0 10px 22px rgba(2,132,199,0.07);
     }
     .videoWrap iframe{
       position: absolute;
@@ -273,7 +208,7 @@
       border: 0;
     }
 
-    /* PDF link button (unified) */
+    /* ---------- PDF Link ---------- */
     .pdfLink{
       display: inline-flex;
       align-items: center;
@@ -282,40 +217,81 @@
       margin-top: 14px;
       font-size: 15px;
       font-weight: 900;
-      color: #fff;
+      color: var(--text-main);
       text-decoration: none;
       padding: 12px 14px;
       border-radius: 14px;
-      border: 1px solid rgba(6,182,212,0.25);
-      background: linear-gradient(180deg, var(--cyan-primary), var(--cyan-dark));
-      box-shadow: 0 10px 24px rgba(6, 182, 212, 0.18);
-      transition: transform .12s ease, box-shadow .12s ease;
+      border: 1px solid rgba(6,182,212,0.45);
+      background: rgba(255,255,255,0.55); /* solid */
+      box-shadow: 0 6px 16px rgba(2,132,199,0.08);
+      transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
     }
     .pdfLink:before{
       content: "📄";
       font-size: 18px;
       line-height: 1;
     }
-    .pdfLink:hover{ transform: translateY(-1px); box-shadow: 0 14px 30px rgba(6, 182, 212, 0.22); }
+    .pdfLink:hover{
+      background: rgba(255,255,255,0.75);
+      transform: translateY(-1px);
+      border-color: rgba(6,182,212,0.65);
+    }
     .pdfLink:active{ transform: translateY(0); }
 
+    /* ---------- Footer ---------- */
     .foot {
-      margin-top: 40px;
+      margin-top: 22px;
       font-size: 13px;
       color: var(--text-muted);
-      opacity: .9;
       text-align: center;
     }
-    .foot a { color: var(--cyan-dark); text-decoration:none; border-bottom: 1px dotted rgba(6,182,212,0.55); }
-    .foot a:hover { color: var(--cyan-dark); border-bottom-color: rgba(6,182,212,0.90); }
+    .foot a {
+      color: var(--cyan-dark);
+      text-decoration:none;
+      border-bottom: 1px dotted rgba(6,182,212,0.7);
+    }
+    .foot a:hover {
+      color: var(--text-main);
+      border-bottom-color: var(--text-main);
+    }
+
+    /* ---------- Section helpers ---------- */
+    .heroSub { max-width: 860px; }
+    .sectionTitleRow{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .statusPill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-main);
+      background: var(--green-light); /* solid */
+      border: 1px solid rgba(16,185,129,0.30);
+      white-space: nowrap;
+      height: fit-content;
+    }
+    .statusPill .dot{
+      width: 8px; height: 8px; border-radius: 99px;
+      background: var(--green-accent);
+      display:inline-block;
+    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <!-- HERO -->
-    <div class="heroCard">
-      <span class="badge">IdentityVoice • B2C Messaging</span>
+
+    <!-- HERO (as a substrate card to keep consistent background) -->
+    <div class="card">
+      <span class="badge"><span class="badgeDot"></span>IdentityVoice • B2C Messaging</span>
+
       <h1>Voice stickers for messaging.</h1>
 
       <p class="heroSub">
@@ -327,12 +303,15 @@
         <b>Now:</b> our working iOS MVP uses <b>on-device DSP</b> for low-latency voice styling (record → preview → send).
         <b>Next:</b> we’re adding an <b>AI editor</b> (clearer, less rambling, fewer ambiguities) and <b>Voice ID enrollment</b> on top.
       </p>
-     <div class="pillRow">
-        <span class="pill"><span class="dot"></span>Message-native output</span>
-        <span class="pill"><span class="dot"></span>Instant preview (DSP MVP)</span>
-        <span class="pill"><span class="dot"></span>AI editor + Voice ID (next)</span>
-        <span class="pill green"><span class="dot"></span>Mimic Challenge + scoring</span>
-      </div>  
+
+      <!-- Pills (you already fixed the position; keep here under title/paragraphs) -->
+      <div class="pillRow">
+        <span class="pill">Message-native output</span>
+        <span class="pill">Instant preview (DSP MVP)</span>
+        <span class="pill">AI editor + Voice ID (next)</span>
+        <span class="pill">Mimic Challenge + scoring (game loop)</span>
+      </div>
+
       <div class="cta">
         <a class="btn primary" href="#demo">Watch the demo</a>
         <a class="btn secondary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Beta%20Access">Join the beta</a>
@@ -340,17 +319,11 @@
       </div>
     </div>
 
-    <div class="divider"></div>
+    <!-- CONTENT GRID -->
+    <div class="grid" style="margin-top:16px;">
 
-    <div class="grid">
-      <!-- 1) THE PROBLEM -->
       <div class="card">
-        <div class="cardHeader">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <span class="numTag">1</span>
-            <h2>The problem</h2>
-          </div>
-        </div>
+        <h2>1) The problem</h2>
         <ul>
           <li><b>Emojis are ambiguous</b> and often misinterpreted.</li>
           <li><b>Voice notes convey emotion</b>, but “performing” in raw voice is socially high-friction.</li>
@@ -358,48 +331,26 @@
         </ul>
       </div>
 
-      <!-- 2) WHAT WE’RE BUILDING -->
       <div class="card">
-        <div class="cardHeader">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <span class="numTag">2</span>
-            <h2>What we’re building</h2>
-          </div>
-        </div>
-
+        <h2>2) What we’re building</h2>
         <p><b>A consumer voice expression layer for messaging.</b></p>
         <ul>
           <li><b>Now (working MVP):</b> on-device DSP styles + instant preview + send via iOS Messages flow.</li>
           <li><b>Next:</b> AI editing + cleanup + “logic tightening,” then render back in a vivid voice.</li>
-          <li><b>Then:</b> reusable Voice ID enrollment + sharing loops + creator packs.</li>
+          <li><b>Later:</b> reusable Voice ID enrollment + sharing loops + creator packs.</li>
         </ul>
       </div>
 
-      <!-- 3) WHY IT’S DIFFERENT -->
       <div class="card">
-        <div class="cardHeader">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <span class="numTag">3</span>
-            <h2>Why it’s different</h2>
-          </div>
-        </div>
-
+        <h2>3) Why it’s different</h2>
         <p>
           <b>Message-native.</b> We don’t keep users inside a standalone companion app.
           We output a portable <b>voice sticker / voice creation</b> that can be dropped into any conversation thread.
         </p>
       </div>
 
-      <!-- 4) PRODUCT DEMO -->
       <div class="card" id="demo">
-        <div class="cardHeader">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <span class="numTag">4</span>
-            <h2>Product demo</h2>
-          </div>
-          <span class="miniTag">Live MVP</span>
-        </div>
-
+        <h2>4) Product demo</h2>
         <p>See the current MVP: record → stylize → preview → send.</p>
 
         <div class="videoWrap">
@@ -416,15 +367,11 @@
         </a>
       </div>
 
-      <!-- 5) STATUS / TRACTION -->
       <div class="card">
-        <div class="cardHeader">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <span class="numTag">5</span>
-            <h2>Status</h2>
-          </div>
+        <div class="sectionTitleRow">
+          <h2>5) Status</h2>
+          <span class="statusPill"><span class="dot"></span>Working MVP</span>
         </div>
-
         <ul>
           <li><b>Working iOS MVP</b>: end-to-end flow for record → transform → preview → send.</li>
           <li><b>Next milestone</b>: ship AI editor + Voice ID enrollment private beta.</li>
@@ -432,30 +379,16 @@
         </ul>
       </div>
 
-      <!-- 6) MOAT / IP -->
       <div class="card">
-        <div class="cardHeader">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <span class="numTag">6</span>
-            <h2>Moat / IP</h2>
-          </div>
-        </div>
-
+        <h2>6) Moat / IP</h2>
         <ul>
           <li>Patent/IP portfolio around style-based voice messaging, role-swap reference rendering + imitation scoring, and persona/voice identity objects.</li>
-          <li>We’re building defensible loops (message-native sharing + Mimic scoring) that drive retention beyond one-off novelty.</li>
+          <li>Defensible loops (message-native sharing + Mimic scoring) that drive retention beyond one-off novelty.</li>
         </ul>
       </div>
 
-      <!-- 7) TEAM -->
       <div class="card">
-        <div class="cardHeader">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <span class="numTag">7</span>
-            <h2>Team</h2>
-          </div>
-        </div>
-
+        <h2>7) Team</h2>
         <ul>
           <li><b>CEO (Alexander):</b> CEO + senior software engineer; drives architecture and execution.</li>
           <li><b>CTO (Miao):</b> senior AI/ML engineer; builds the core voice + scoring pipeline.</li>
@@ -464,32 +397,29 @@
         </ul>
       </div>
 
-      <!-- 8) ROADMAP -->
       <div class="card">
-        <div class="cardHeader">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <span class="numTag">8</span>
-            <h2>Roadmap</h2>
-          </div>
-        </div>
-
+        <h2>8) Roadmap (clear and honest)</h2>
         <ul>
           <li><b>Today:</b> low-latency DSP voice styling MVP in iOS.</li>
           <li><b>Next:</b> AI editor (clearer speech → cleaner script) + Voice ID enrollment.</li>
           <li><b>Then:</b> Mimic Challenge + scoring expansion + creator voice packs.</li>
         </ul>
       </div>
+
     </div>
 
-    <div class="cta" style="justify-content:center; margin-top: 18px;">
-      <a class="btn primary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Beta%20Access">Join the beta</a>
-      <a class="btn secondary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Investor%20Intro">Contact</a>
+    <!-- CTA bottom -->
+    <div class="card" style="margin-top:16px;">
+      <div class="cta" style="margin-top:0;">
+        <a class="btn primary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Beta%20Access">Join the beta</a>
+        <a class="btn secondary" href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Investor%20Intro">Contact</a>
+      </div>
+      <div class="foot" style="margin-top:14px;">
+        © <span id="y"></span> IdentityVoice • <code>identityvoice.ca</code> •
+        <a href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Beta%20Access">Beta</a>
+      </div>
     </div>
 
-    <div class="foot">
-      © <span id="y"></span> IdentityVoice • <code>identityvoice.ca</code> •
-      <a href="mailto:ted.z@identityvoice.ca?subject=IdentityVoice%20Beta%20Access">Beta</a>
-    </div>
   </div>
 
   <script>
